@@ -1,14 +1,15 @@
-function Navbar() {
-    return (
-        <nav className="bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-600">
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
-                </a>
-            </div>
-        </nav>
+// Navbar.js
+import React from "react";
 
-    )
+function Navbar({ toggleSidebar }) {
+    return (
+        <nav className="flex items-center justify-between p-4 bg-blue-600 text-white">
+            <h1 className="text-lg font-bold">Mapa Interativo</h1>
+            <button onClick={toggleSidebar} className="text-white">
+                ☰
+            </button>
+        </nav>
+    );
 }
 
 export default Navbar;
