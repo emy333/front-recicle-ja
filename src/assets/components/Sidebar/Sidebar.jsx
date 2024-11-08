@@ -25,8 +25,6 @@ function Sidebar({ isOpen, toggleSidebar }) {
                     </button>
                 </div>
 
-
-
                 <ul className="mt-4 space-y-2">
 
                     <Link to='/home' ><li className="p-2 rounded hover:bg-gray-100  hover:text-slate-950 cursor-pointer text-gray-100 ">Início</li></Link>
