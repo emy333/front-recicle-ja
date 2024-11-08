@@ -1,29 +1,22 @@
-// MapView.js
-import React from 'react';
+import React from 'react'; 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 function MapView() {
     return (
-        <MapContainer center={[-3.7332646433935563, -38.52168870873056]}
-            zoom={13} className="w-full h-full rounded-lg shadow-xl">
-            <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution="&copy; OpenStreetMap contributors"
-                className="h-full w-full"
-            />
-            <Marker position={[-3.8313386460139642, -38.48798975490939]}>
-                <Popup>
-                    Ecoponto Messejana ll
-                </Popup>
-            </Marker>
-            <Marker position={[ -3.8525397,-38.4897991,16.5]}>
-                <Popup>
-                    Ecoponto São Bento II
-                </Popup>
-            </Marker>
-            -3.8525397,-38.4897991,16.5
-        </MapContainer>
+        <div className="flex-1 w-full h-full mb-1 overflow-hidden rounded-lg shadow-xl">
+            <MapContainer center={[40.64529, -74.166665]} zoom={13} className="w-full h-full">
+                <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution="&copy; OpenStreetMap contributors"
+                />
+                <Marker position={[40.64529, -74.166665]}>
+                    <Popup>
+                        65-1 Bayard, St Staten Island, NY 10312
+                    </Popup>
+                </Marker>
+            </MapContainer>
+        </div>
     );
 }
 
