@@ -1,5 +1,5 @@
 // MapView.js
-import React from 'react'; 
+import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -11,9 +11,9 @@ function MapView() {
                 attribution="&copy; OpenStreetMap contributors"
                 className="h-full w-full"
             />
-            <Marker position={[40.64529, -74.166665]}>
+            <Marker position={[-3.8313386460139642, -38.48798975490939]}>
                 <Popup>
-                    65-1 Bayard, St Staten Island, NY 10312
+                    Eco Ponto Messejana ll
                 </Popup>
             </Marker>
         </MapContainer>

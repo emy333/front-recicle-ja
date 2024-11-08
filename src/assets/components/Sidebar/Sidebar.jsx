@@ -1,4 +1,5 @@
 import React from "react";
+import { IoCloseOutline } from "react-icons/io5";
 
 function Sidebar({ isOpen, toggleSidebar }) {
     return (
@@ -16,10 +17,11 @@ function Sidebar({ isOpen, toggleSidebar }) {
                 <div className="flex justify-between items-center">
                     <h2 className="lg:text-[25px] font-semibold text-white">RecicleJá</h2>
                     <button
-                        className="p-2 text-right md:hidden"
+                        className="p-2 text-right md:hidden text-white"
                         onClick={toggleSidebar}
                     >
-                        ✖️
+                        <IoCloseOutline />
+
                     </button>
                 </div>
 
