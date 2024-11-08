@@ -1,5 +1,6 @@
 import React from "react";
 import { IoCloseOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 function Sidebar({ isOpen, toggleSidebar }) {
     return (
@@ -27,8 +28,11 @@ function Sidebar({ isOpen, toggleSidebar }) {
 
 
                 <ul className="mt-4 space-y-2">
-                    <li className="p-2 rounded hover:bg-gray-100  hover:text-slate-950 cursor-pointer text-gray-100 ">Perfil</li>
+
+                    <Link to='/home' ><li className="p-2 rounded hover:bg-gray-100  hover:text-slate-950 cursor-pointer text-gray-100 ">Início</li></Link>
+                    <Link to='/perfil' ><li className="p-2 rounded hover:bg-gray-100  hover:text-slate-950  cursor-pointer text-gray-100">Perfil</li></Link>
                     <li className="p-2 rounded hover:bg-gray-100  hover:text-slate-950  cursor-pointer text-gray-100">Sair</li>
+
                 </ul>
             </div>
         </>
