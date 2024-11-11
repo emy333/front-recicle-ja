@@ -28,8 +28,8 @@ function Sidebar({ isOpen, toggleSidebar }) {
                 <ul className="mt-4 space-y-2">
 
                     <Link to='/home' ><li className="p-2 rounded hover:bg-gray-100  hover:text-slate-950 cursor-pointer text-gray-100 ">Início</li></Link>
-                    <Link to='/perfil' ><li className="p-2 rounded hover:bg-gray-100  hover:text-slate-950  cursor-pointer text-gray-100">Perfil</li></Link>
-                    <li className="p-2 rounded hover:bg-gray-100  hover:text-slate-950  cursor-pointer text-gray-100">Sair</li>
+                    <Link to='/perfil'><li className="p-2 rounded hover:bg-gray-100  hover:text-slate-950  cursor-pointer text-gray-100">Perfil</li></Link>
+                    <Link to='/login'><li className="p-2 rounded hover:bg-gray-100  hover:text-slate-950  cursor-pointer text-gray-100">Sair</li></Link>
 
                 </ul>
             </div>

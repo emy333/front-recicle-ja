@@ -18,13 +18,16 @@ function Login() {
                     placeholder="Senha"
                     required
                 />
-                <button
-                    type="subimit"
-                    className="focus:outline-none text-white bg-green-600 rounded-lg text-[15px] font-bold px-5 py-2.5 w-full mt-5"
+                <Link to='/home'>
+                    <button
+                        type="subimit"
+                        className="focus:outline-none text-white bg-green-600 rounded-lg text-[15px] font-bold px-5 py-2.5 w-full mt-5"
 
-                >
-                    Entrar
-                </button>
+                    >
+                        Entrar
+                    </button>
+                </Link>
+
 
                 <Link to={'/cadastro'} className="mt-3 font-medium text-[#17A697] cursor-pointer">Fazer Cadastro</Link>
 
