@@ -9,7 +9,7 @@ function Login() {
                 <input
                     type="email"
                     className="flex flex-row m-2 w-full px-2 py-2 shadow-sm border-2 border-[#DEE0E0] rounded-lg"
-                    placeholder="Email"
+                    placeholder="Email" 
                     required
                 />
                 <input
