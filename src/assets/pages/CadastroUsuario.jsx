@@ -19,7 +19,7 @@ function CadastroUsuario() {
             const response = await axiosInstance.post('/users', {
                 nome_completo: nome,
                 email: email,
-                senha: senha
+                senha: senha 
             });
 
             setSuccessMessage('Cadastro concluído com sucesso! Agora, faça login para começar a explorar!');
