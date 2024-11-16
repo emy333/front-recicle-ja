@@ -4,6 +4,7 @@ import MapView from "../components/MapView/main";
 import Search from "../components/Search/main";
 
 function Home(){
+    console.log('teste')
     return (
         <MainLayout>
             {/* <Search/> */}
