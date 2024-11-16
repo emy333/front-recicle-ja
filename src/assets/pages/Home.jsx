@@ -6,7 +6,7 @@ import Search from "../components/Search/main";
 function Home(){
     return (
         <MainLayout>
-            <Search/>
+            {/* <Search/> */}
             <MapView/>
         </MainLayout>
     );

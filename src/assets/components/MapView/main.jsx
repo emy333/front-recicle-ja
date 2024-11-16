@@ -1,21 +1,110 @@
-import React from 'react'; 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+import React, { useEffect, useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import axiosInstance from "../../services/api";
+import Snipper from "../Snipper/main";
 
 function MapView() {
+    const [ecopontos, setEcopontos] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [userLocation, setUserLocation] = useState(null);
+
+    const getUserLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    setUserLocation({ lat: latitude, lng: longitude });
+                },
+                (error) => {
+                    console.error("Erro ao obter localização:", error);
+                    setUserLocation({ lat: -3.8443809, lng: -38.7166987 });
+                }
+            );
+        } else {
+            console.error("Geolocalização não suportada no navegador.");
+            setUserLocation({ lat: -3.8443809, lng: -38.7166987 });
+        }
+    };
+
+    useEffect(() => {
+        getUserLocation();
+
+        const fetchEcopontos = async () => {
+            const token = localStorage.getItem("token");
+
+            if (token) {
+                try {
+                    const response = await axiosInstance.get("/ecopontos", {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    });
+
+                    setEcopontos(response.data);
+                    setLoading(false);
+                } catch (error) {
+                    console.error("Erro ao buscar ecopontos:", error);
+                    setLoading(false);
+                }
+            } else {
+                console.error("Token não encontrado no localStorage");
+                setLoading(false);
+            }
+        };
+
+        fetchEcopontos();
+    }, []);
+
+    const MapUpdater = () => {
+        const map = useMap();
+
+        if (ecopontos.length > 0) {
+            const ecopontoPositions = ecopontos.map(ecoponto => [ecoponto.latitude, ecoponto.longitude]);
+
+            if (userLocation) {
+                ecopontoPositions.push([userLocation.lat, userLocation.lng]);
+            }
+
+            map.fitBounds(ecopontoPositions);
+        }
+
+        return null;
+    };
+
     return (
-        <div className="flex-1 w-full h-full mb-1 overflow-hidden rounded-lg shadow-xl">
-            <MapContainer center={[40.64529, -74.166665]} zoom={13} className="w-full h-full">
-                <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution="&copy; OpenStreetMap contributors"
-                />
-                <Marker position={[40.64529, -74.166665]}>
-                    <Popup>
-                        65-1 Bayard, St Staten Island, NY 10312
-                    </Popup>
-                </Marker>
-            </MapContainer>
+        <div className="flex w-full h-full mb-1 overflow-hidden rounded-lg shadow-xl">
+            {loading ? (
+                <div className="flex justify-center items-center w-full h-full">
+                    <Snipper />
+                </div>
+            ) : (
+                userLocation && (
+                    <MapContainer
+                        center={userLocation}
+                        zoom={13}
+                        className="w-full h-full"
+                    >
+                        <TileLayer
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            attribution="&copy; OpenStreetMap contributors"
+                        />
+                        <MapUpdater />
+
+                        {ecopontos.map((ecoponto) => (
+                            <Marker
+                                key={ecoponto.id}
+                                position={[ecoponto.latitude, ecoponto.longitude]}
+                            >
+                                <Popup>
+                                    <h1 className="font-bold text-[15px]">{ecoponto.nome_ecoponto}</h1>
+                                    {ecoponto.endereco}
+                                </Popup>
+                            </Marker>
+                        ))}
+                    </MapContainer>
+                )
+            )}
         </div>
     );
 }
