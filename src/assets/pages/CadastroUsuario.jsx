@@ -1,8 +1,12 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import axiosInstance from "../services/api";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom"; // Certifique-se de importar o useNavigate
 import AlertError from "../components/Alert/AlertError";
 import AlertSuccess from "../components/Alert/AlertSuccess";
+import axiosInstance from "../services/api";
+
+function validateToken(token) {
+    return !!token; // Verifica se o token é válido
+}
 
 function CadastroUsuario() {
     const [nome, setNome] = useState('');
@@ -12,6 +16,15 @@ function CadastroUsuario() {
     const [alertSuccess, setAlertSuccess] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate(); // Hook para navegação
+
+    // Verificação do token ao carregar a página
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token && validateToken(token)) {
+            navigate('/home'); // Se houver um token válido, redireciona para a home
+        }
+    }, [navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,19 +32,21 @@ function CadastroUsuario() {
             const response = await axiosInstance.post('/users', {
                 nome_completo: nome,
                 email: email,
-                senha: senha 
+                senha: senha
             });
 
             setSuccessMessage('Cadastro concluído com sucesso! Agora, faça login para começar a explorar!');
             setAlertSuccess(true);
             setAlertError(false);
 
+            // Limpa os campos após o cadastro
             setNome("");
             setEmail("");
             setSenha("");
         } catch (error) {
             console.log("Erro ao cadastrar o usuário: ", error);
 
+            // Exibe a mensagem de erro
             setError(error.response?.data?.msg || "Erro ao cadastrar o usuário.");
             setAlertError(true);
             setAlertSuccess(false);
@@ -44,7 +59,6 @@ function CadastroUsuario() {
                 <h1 className="font-bold text-green-600 text-2xl mb-5">RecicleJá</h1>
 
                 {alertSuccess && <AlertSuccess className="w-full" message={successMessage} />}
-
                 {alertError && <AlertError className="w-full" message={error} />}
 
                 <div className="mb-5 w-full">
