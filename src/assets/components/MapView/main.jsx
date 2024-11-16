@@ -1,14 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import axiosInstance from "../../services/api";
 import Snipper from "../Snipper/main";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+
+
+const customMarkerIcon = new L.Icon({
+    iconUrl: markerIcon,
+    iconRetinaUrl: markerIcon2x,
+    shadowUrl: markerShadow,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41], 
+    popupAnchor: [1, -34], 
+    shadowSize: [41, 41], 
+});
+
+L.Marker.prototype.options.icon = customMarkerIcon;
 
 function MapView() {
     const [ecopontos, setEcopontos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [userLocation, setUserLocation] = useState(null);
 
+    // Obtém a localização do usuário
     const getUserLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -27,6 +45,7 @@ function MapView() {
         }
     };
 
+    // Fetch inicial dos ecopontos
     useEffect(() => {
         getUserLocation();
 
@@ -56,6 +75,7 @@ function MapView() {
         fetchEcopontos();
     }, []);
 
+    // Atualiza o mapa para ajustar os bounds
     const MapUpdater = () => {
         const map = useMap();
 
