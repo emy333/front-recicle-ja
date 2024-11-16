@@ -15,11 +15,13 @@ function MainLayout({ children }) {
             setIsMobile(window.innerWidth < 768);
         };
 
+        // Verificar o tamanho da tela imediatamente após o primeiro render
         handleResize();
+
         window.addEventListener("resize", handleResize);
 
         return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    }, []); // Executa uma vez após o primeiro render
 
     return (
         <div className="flex flex-col md:flex-row h-screen overflow-hidden">
