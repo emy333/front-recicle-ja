@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Home from './assets/pages/Home';
 import Login from './assets/pages/Login';
 import CadastroUsuario from './assets/pages/CadastroUsuario';
-import Perfil from './assets/pages/Perfil';
+import Sobre from './assets/pages/Sobre';
 import PrivateRoute from './assets/components/PrivateRoute/main';
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
 
         <Route element={<PrivateRoute />}>
           <Route path="/home" element={<Home />} />
-          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/sobre" element={<Sobre />} />
         </Route>
       </Routes>
     </Router>
